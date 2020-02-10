@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \TopDigital\Auth\Http\Middleware\Cors::class,
         ],
     ];
 
@@ -61,6 +62,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'oauth.check-client' => \TopDigital\Auth\Http\Middleware\CheckOAuthClient::class,
+        'cors' => \TopDigital\Auth\Http\Middleware\Cors::class,
     ];
 
     /**

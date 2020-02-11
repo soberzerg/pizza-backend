@@ -12,3 +12,11 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+Route::group([
+    'middleware' => ['cors'],
+], function () {
+
+    Route::resource('products', 'ProductsController')->only(['index']);
+});

@@ -1,3 +1,4 @@
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
@@ -6,6 +7,70 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
+
+#### This test project was bootstrapped with Laravel
+
+In the project directory, you can run:
+
+`$ php artisan serve`
+
+Runs the app in the development mode.<br />
+Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
+
+The page must say "Hello! All is OK".
+
+### Deploy
+
+To deploy on Heroku & remotemysql.com, after cloning this repo:
+
+1. Create database on [http://remotemysql.com](http://remotemysql.com), get DB user, name, and password.
+
+2. Create new Heroku project
+
+```
+$ heroku create
+Creating mighty-hamlet-1982... done, stack is heroku-18
+http://mighty-hamlet-1982.herokuapp.com/ | git@heroku.com:mighty-hamlet-1982.git
+Git remote heroku added
+```
+
+3. Create `APP_KEY` and push it to Heroku:
+
+```
+$ heroku config:set APP_KEY=$(php artisan --no-ansi key:generate --show)
+```
+
+4. Set `APP_URL` and push it (take it from step 2):
+
+```
+$ heroku config:set APP_URL=http://mighty-hamlet-1982.herokuapp.com/
+```
+
+5. Set the remaining config vars and push it to Heroku:
+
+```
+$ heroku config:set LOG_CHANNEL=stderr
+$ heroku config:set DB_HOST=remotemysql.com
+$ heroku config:set DB_USERNAME=<Database username here>
+$ heroku config:set DB_DATABASE=<Database name here>
+$ heroku config:set DB_PASSWORD=<Database password here>
+```
+
+6. Deploy to Heroku:
+
+```
+$ git push heroku master
+```
+
+7. Now we can run migrations and seeds, install Passport:
+
+```
+$ php artisan migrate:fresh --seed
+$ php artisan auth:secret
+$ php artisan passport:install
+```
+
+So, project is ready! Check it on your `APP_URL`
 
 ## About Laravel
 

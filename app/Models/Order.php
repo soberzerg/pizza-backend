@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Order
@@ -34,5 +37,33 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
-    //
+    use SoftDeletes;
+
+    const
+        STATUS_NEW = 0,
+        STATUS_IN_PROGRESS = 1
+    ;
+
+    protected $attributes = [
+        'status' => self::STATUS_NEW,
+        'total' => 0,
+    ];
+
+    protected $fillable = ['address', 'contact', 'delivery_cost'];
+
+    public function products() : BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'order_products')
+            ->using(OrderProducts::class)
+            ->withPivot('quantity');
+    }
+
+    public function calculateTotal()
+    {
+        $total = $this->delivery_cost;
+        foreach($this->products()->get() as $product){
+            $total += $product->price * $product->pivot->quantity;
+        }
+        $this->total = round($total, 2);
+    }
 }

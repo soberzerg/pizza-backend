@@ -19,4 +19,14 @@ Route::group([
 ], function () {
 
     Route::resource('products', 'ProductsController')->only(['index']);
+
+    Route::get('delivery-cost', function () {
+        return response()->json(['cost' => rand(99,699) / 100]);
+    });
+
+    Route::group([
+        'middleware' => ['auth:api'],
+    ], function () {
+        Route::resource('orders', 'OrdersController')->only(['index', 'store']);
+    });
 });

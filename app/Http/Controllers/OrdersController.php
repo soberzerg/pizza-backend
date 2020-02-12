@@ -32,7 +32,7 @@ class OrdersController extends Controller
     {
         $order = new Order();
         $order->fill($request->validated());
-        if (\Auth::check()) {
+        if (\Auth::id()) {
             $order->user_id = \Auth::id();
         }
         $order->save();

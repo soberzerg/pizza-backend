@@ -24,9 +24,11 @@ Route::group([
         return response()->json(['cost' => rand(99,699) / 100]);
     });
 
+    Route::resource('orders', 'OrdersController')->only(['store']);
+
     Route::group([
         'middleware' => ['auth:api'],
     ], function () {
-        Route::resource('orders', 'OrdersController')->only(['index', 'store']);
+        Route::resource('orders', 'OrdersController')->only(['index']);
     });
 });

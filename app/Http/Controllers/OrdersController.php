@@ -21,7 +21,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        return new OrderCollection(Order::where('user_id', \Auth::id())->get());
+        return new OrderCollection(Order::where('user_id', \Auth::id())->orderBy('created_at', 'desc')->get());
     }
 
     /**

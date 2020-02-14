@@ -72,6 +72,16 @@ $ php artisan passport:install
 
 So, project is ready! Check it on your `APP_URL`
 
+### Tests
+
+To run tests, you can use `phpunit`:
+
+```
+$ phpunit
+```
+
+To set up your test enviroment, you can rewrite `.env.testing` config.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

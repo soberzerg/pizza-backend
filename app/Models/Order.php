@@ -60,7 +60,7 @@ class Order extends Model
 
     public function calculateTotal()
     {
-        $total = $this->delivery_cost;
+        $total = floatval($this->delivery_cost);
         foreach($this->products()->get() as $product){
             $total += $product->price * $product->pivot->quantity;
         }
